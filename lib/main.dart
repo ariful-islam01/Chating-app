@@ -5,6 +5,7 @@ import 'package:chting_app/screens/home_screen.dart';
 import 'package:chting_app/screens/news_feed.dart';
 import 'package:chting_app/screens/splash_screen.dart';
 import 'package:chting_app/screens/upload_file_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart' show Firebase, FirebaseOptions;
 import 'package:flutter/services.dart';

@@ -1,11 +1,13 @@
+import 'dart:developer';
+
 import 'package:chting_app/api/apis.dart';
 import 'package:chting_app/helper/dialogs.dart';
 import 'package:chting_app/screens/auth/login_screen.dart';
 import 'package:chting_app/screens/home_screen.dart';
 import 'package:chting_app/screens/upload_file_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 
 class NewsFeedPage extends StatefulWidget {
@@ -38,7 +40,6 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
       imageUrl: 'https://via.placeholder.com/150',
     ),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,20 +80,21 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
             ListTile(
               title: const Text('Upload PDF'),
               onTap: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context) =>const UploadFilesPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const UploadFilesPage()));
               },
-
             ),
             ListTile(
-              title: const Text('Redex Balace'),
-                onTap: () {
+              title: const Text('Redex Balance'),
+              onTap: () {
                 //Navigator.push(context,MaterialPageRoute(builder: (context) => const HomeScreen()));
               },
             ),
             ListTile(
               title: const Text('Redex Chats'),
               onTap: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context) => const HomeScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()));
               },
             ),
             ListTile(
@@ -104,30 +106,30 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
             ListTile(
               title: const Text('Log Out'),
               onTap: () async {
-                  //for showing progress dialog
-                  Dialogs.showProgressBar(context);
+                //for showing progress dialog
+                Dialogs.showProgressBar(context);
 
-                  await APIs.updateActiveStatus(false);
+                await APIs.updateActiveStatus(false);
 
-                  //sign out from app
-                  await APIs.auth.signOut().then((value) async {
-                    await GoogleSignIn().signOut().then((value) {
-                      //for hiding progress dialog
-                      Navigator.pop(context);
+                //sign out from app
+                await APIs.auth.signOut().then((value) async {
+                  await GoogleSignIn().signOut().then((value) {
+                    //for hiding progress dialog
+                    Navigator.pop(context);
 
-                      //for moving to home screen
-                      Navigator.pop(context);
+                    //for moving to home screen
+                    Navigator.pop(context);
 
-                      // APIs.auth = FirebaseAuth.instance;
+                    // APIs.auth = FirebaseAuth.instance;
 
-                      //replacing home screen with login screen
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const LoginScreen()));
-                    });
+                    //replacing home screen with login screen
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const LoginScreen()));
                   });
-                },
+                });
+              },
             ),
           ],
         ),
@@ -180,7 +182,8 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(10)),
                     child: Image.network(
                       newsItems[index].imageUrl,
                       height: 200,
@@ -194,7 +197,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                       children: [
                         Text(
                           newsItems[index].title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -202,7 +205,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                         const SizedBox(height: 8),
                         Text(
                           newsItems[index].description,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ],
                     ),

@@ -10,7 +10,7 @@ import 'package:http/http.dart';
 
 import '../models/chat_user.dart';
 import '../models/message.dart';
-//import 'notification_access_token.dart';
+import 'notification_access_token.dart';
 
 class APIs {
   // for authentication
@@ -52,14 +52,14 @@ class APIs {
     });
 
     // for handling foreground messages
-    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    //   log('Got a message whilst in the foreground!');
-    //   log('Message data: ${message.data}');
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log('Got a message whilst in the foreground!');
+      log('Message data: ${message.data}');
 
-    //   if (message.notification != null) {
-    //     log('Message also contained a notification: ${message.notification}');
-    //   }
-    // });
+      if (message.notification != null) {
+        log('Message also contained a notification: ${message.notification}');
+      }
+    });
   }
 
   // for sending push notification (Updated Codes)
@@ -80,7 +80,7 @@ class APIs {
       const projectID = 'chatingapp-42fb4';
 
       // get firebase admin token
-      final bearerToken = 1;//await NotificationAccessToken.getToken;
+      final bearerToken = await NotificationAccessToken.getToken;
 
       log('bearerToken: $bearerToken');
 
